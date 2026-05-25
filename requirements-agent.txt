@@ -4,3 +4,5 @@ litellm
 openai
 requests
 python-dotenv
+fastapi
+uvicorn
