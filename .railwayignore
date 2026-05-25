@@ -1,0 +1,15 @@
+# Keep the agent image upload small — exclude everything not needed to run adk web
+.venv/
+.git/
+data/
+dump/
+walkthrough/
+model/
+src/
+supply_chain_toolset/
+*.backup
+*.dump
+*:Zone.Identifier
+__pycache__/
+*.pyc
+.adk/

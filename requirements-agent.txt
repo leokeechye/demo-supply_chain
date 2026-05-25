@@ -1,0 +1,6 @@
+# Slim deps for the deployed ADK agent web UI (not the full repo stack)
+google-adk
+litellm
+openai
+requests
+python-dotenv
