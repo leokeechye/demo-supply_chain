@@ -25,16 +25,16 @@ _runner = Runner(agent=root_agent, app_name=APP_NAME, session_service=_session_s
 
 # Ten demo prompts, each exercising a different part of the graph / toolset.
 EXAMPLES = [
-    "Which raw materials are single-sourced, and what's the business risk if those suppliers go offline?",
-    "Who are the top 5 suppliers by number of products, and how concentrated is our supply base?",
-    "Which active pharmaceutical ingredients are used across 5 or more different drug products?",
-    "List raw materials and how many suppliers each has, flagging the risky single-supplier ones.",
-    "List 5 drug products in the graph, then trace the full supply path for one of them.",
-    "Pick a drug product and show its complete dependency chain from raw materials to finished good.",
-    "List 5 products and show the distributors for one of them.",
-    "Find cross-border or cyclic shipping routes that create logistics inefficiency.",
-    "How many suppliers, raw materials, and drug products are in the database?",
-    "Give me an executive overview of this pharmaceutical supply chain and its biggest risks.",
+    "Which raw materials have only one supplier — and what breaks if that supplier fails?",
+    "Who are our top 5 suppliers, and how dependent are we on them?",
+    "Which active ingredients (APIs) are used in 5+ products — our biggest single points of failure?",
+    "Rank raw materials by number of suppliers and flag the single-source ones.",
+    "List 5 drug products, then trace the full supply path of one from raw material to shelf.",
+    "Map a drug product's complete dependency chain — every input it relies on.",
+    "Who distributes our products, and where are the distribution concentration risks?",
+    "Find inefficient shipping routes (cross-border or circular) we could optimize.",
+    "How big is this network? Count the suppliers, raw materials, and drug products.",
+    "Give me a 60-second executive briefing on this supply chain's biggest risks.",
 ]
 
 
@@ -80,14 +80,18 @@ def index():
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pharma Supply-Chain Agent — Demo</title>
+<title>Dr Adrian Tan Consultation Service — Supply-Chain Agent</title>
 <style>
   :root {{ --bg:#0b1020; --card:#161d33; --line:#27304d; --accent:#5b8cff; --text:#e7ebf5; --muted:#9aa6c4; }}
   * {{ box-sizing:border-box; }}
   body {{ margin:0; background:linear-gradient(180deg,#0b1020,#0e1430); color:var(--text);
          font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }}
   .wrap {{ max-width:980px; margin:0 auto; padding:32px 20px 80px; }}
-  h1 {{ font-size:26px; margin:0 0 4px; }}
+  .brand {{ display:flex; align-items:center; gap:14px; margin-bottom:18px; }}
+  .brand svg {{ flex:0 0 auto; }}
+  .brand .name {{ font-size:22px; font-weight:700; letter-spacing:.2px; line-height:1.1; }}
+  .brand .tag {{ color:var(--muted); font-size:13px; margin-top:2px; }}
+  h1 {{ font-size:24px; margin:0 0 4px; }}
   .sub {{ color:var(--muted); margin:0 0 24px; font-size:15px; }}
   .pill {{ display:inline-block; background:#13351f; color:#5fe39a; border:1px solid #1f5c38;
           font-size:12px; padding:2px 10px; border-radius:999px; margin-left:8px; vertical-align:middle; }}
@@ -113,7 +117,31 @@ def index():
 </head>
 <body>
   <div class="wrap">
-    <h1>Pharmaceutical Supply-Chain Agent <span class="pill">live</span></h1>
+    <div class="brand">
+      <svg width="52" height="52" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="logo">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#5b8cff"/><stop offset="1" stop-color="#5fe39a"/>
+          </linearGradient>
+        </defs>
+        <circle cx="32" cy="32" r="30" stroke="url(#g)" stroke-width="2.5" opacity="0.55"/>
+        <!-- supply-chain node graph -->
+        <line x1="20" y1="22" x2="32" y2="32" stroke="url(#g)" stroke-width="2.2"/>
+        <line x1="44" y1="20" x2="32" y2="32" stroke="url(#g)" stroke-width="2.2"/>
+        <line x1="18" y1="44" x2="32" y2="32" stroke="url(#g)" stroke-width="2.2"/>
+        <line x1="46" y1="44" x2="32" y2="32" stroke="url(#g)" stroke-width="2.2"/>
+        <circle cx="32" cy="32" r="6" fill="url(#g)"/>
+        <circle cx="20" cy="22" r="4" fill="#5b8cff"/>
+        <circle cx="44" cy="20" r="4" fill="#5fe39a"/>
+        <circle cx="18" cy="44" r="4" fill="#5fe39a"/>
+        <circle cx="46" cy="44" r="4" fill="#5b8cff"/>
+      </svg>
+      <div>
+        <div class="name">Dr Adrian Tan Consultation Service</div>
+        <div class="tag">Pharmaceutical Supply-Chain Intelligence</div>
+      </div>
+    </div>
+    <h1>Supply-Chain Agent <span class="pill">live</span></h1>
     <p class="sub">Ask in plain English. The agent queries a Neo4j graph of 6M+ nodes
        (suppliers → raw materials → APIs → drug products → distributors) via a remote toolset.</p>
 
