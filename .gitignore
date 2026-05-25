@@ -1,3 +1,16 @@
 .DS_Store
 .env
 venv/
+.venv/
+
+# Large Neo4j data dumps/backups — never commit (GitHub rejects >100MB)
+*.backup
+*.dump
+
+# WSL/Windows zone metadata
+*:Zone.Identifier
+
+# Python / ADK runtime artifacts
+__pycache__/
+*.pyc
+.adk/

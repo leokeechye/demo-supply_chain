@@ -14,4 +14,4 @@ model:
 toolset:
   type: http
   connection_params:
-    url: https://supply-chain-toolset-373589861902.us-central1.run.app/tools
+    url: https://supply-chain-toolset-production.up.railway.app/tools
